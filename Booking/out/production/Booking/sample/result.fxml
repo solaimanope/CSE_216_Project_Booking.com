@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ResultScene">
+   <children>
+      <TableView fx:id="hotelsList" layoutX="76.0" layoutY="57.0" prefHeight="342.0" prefWidth="448.0" AnchorPane.bottomAnchor="101.0" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="57.0">
+        <columns>
+          <TableColumn fx:id="propertyCol" editable="false" prefWidth="274.0" sortable="false" text="Hotel" />
+          <TableColumn fx:id="priceCol" editable="false" prefWidth="90.33331298828125" text="Price" />
+            <TableColumn fx:id="ratingCol" editable="false" prefWidth="82.66668701171875" text="Rating" />
+        </columns>
+      </TableView>
+      <Button fx:id="proceed" layoutX="444.0" layoutY="432.0" mnemonicParsing="false" onAction="#proceedClicked" text="Proceed">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="goBack" layoutX="76.0" layoutY="432.0" mnemonicParsing="false" onAction="#goBackClicked" text="Go back">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
