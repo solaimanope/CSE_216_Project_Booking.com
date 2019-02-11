@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RoomScene">
+   <children>
+      <TableView fx:id="roomsList" layoutX="38.0" layoutY="209.0" prefHeight="212.0" prefWidth="524.0" AnchorPane.bottomAnchor="79.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="209.0">
+        <columns>
+          <TableColumn fx:id="roomTypeCol" editable="false" prefWidth="240.66668701171875" sortable="false" text="Room Type" />
+          <TableColumn fx:id="sleepsCol" editable="false" prefWidth="65.33331298828125" text="Sleeps" />
+            <TableColumn fx:id="priceCol" editable="false" prefWidth="102.0" text="Price" />
+            <TableColumn fx:id="acCol" editable="false" prefWidth="112.66668701171875" text="Air Conditioned" />
+        </columns>
+      </TableView>
+      <Button fx:id="bookNow" layoutX="462.0" layoutY="432.0" mnemonicParsing="false" onAction="#bookNowClicked" text="Book Now!">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="goBack" layoutX="38.0" layoutY="432.0" mnemonicParsing="false" onAction="#goBackClicked" text="Go back">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <TextArea fx:id="hotelDesc" editable="false" layoutX="38.0" layoutY="73.0" prefHeight="120.0" prefWidth="524.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextArea>
+      <Label fx:id="hotelName" layoutX="41.0" layoutY="14.0" text="Hotel Name">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="hotelRating" layoutX="41.0" layoutY="39.0" text="Rating: 9.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

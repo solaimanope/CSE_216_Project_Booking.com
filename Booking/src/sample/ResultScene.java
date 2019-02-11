@@ -23,6 +23,7 @@ import java.util.Observable;
 import java.util.ResourceBundle;
 
 public class ResultScene implements Initializable {
+    public static String selectedProperty;
 
     public TableView<Property> hotelsList;
     public Button goBack;
@@ -80,7 +81,12 @@ public class ResultScene implements Initializable {
     public void proceedClicked(ActionEvent event) throws Exception {
         Property property = hotelsList.getSelectionModel().getSelectedItem();
         if (property==null) System.out.println("No property selected yet!");
-        else System.out.println("Selected " + property.pid + " " + property.pname);
+        else {
+            System.out.println("Selected " + property.pid + " " + property.pname);
+            selectedProperty = property.pid;
+            Parent root = FXMLLoader.load(getClass().getResource("roomlist.fxml"));
+            Main.stage.setScene(new Scene(root, 600, 500));
+        }
     }
 
     public class Property {
