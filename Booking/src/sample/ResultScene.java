@@ -57,7 +57,6 @@ public class ResultScene implements Initializable {
             stmt.setString(3, SearchScene.inDate.toString());
             stmt.setString(4, SearchScene.outDate.toString());
             stmt.setInt(5, SearchScene.persons);
-
             rs = stmt.executeQuery();
             displayProperties(rs);
         } catch (Exception e) {

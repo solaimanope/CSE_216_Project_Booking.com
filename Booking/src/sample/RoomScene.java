@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
@@ -25,6 +26,8 @@ public class RoomScene implements Initializable {
     public TextArea hotelDesc;
     public Label hotelName;
     public Label hotelRating;
+    public Button seeAllReviews;
+    public static String hName;
 
     public String getQueryString() {
         String SQL = "select *\n" +
@@ -36,6 +39,10 @@ public class RoomScene implements Initializable {
     public String getInfoQueryString() {
         String SQL = "select * from properties\n" +
                 "where property_id  = ?";
+        return SQL;
+    }
+    public String getBookingQueryString() {
+        String SQL = "CALL add_booking(?, ?, to_date(?, 'YYYY-MM-DD'), to_date(?, 'YYYY-MM-DD'), ?)";
         return SQL;
     }
 
@@ -50,6 +57,7 @@ public class RoomScene implements Initializable {
 
             rs.next();
             hotelName.setText(rs.getString("property_name"));
+            hName = hotelName.getText();
             hotelRating.setText(rs.getString("rating"));
             hotelDesc.setText(rs.getString("description"));
 
@@ -103,7 +111,28 @@ public class RoomScene implements Initializable {
     public void bookNowClicked(ActionEvent event) throws Exception {
         Room room = roomsList.getSelectionModel().getSelectedItem();
         if (room==null) System.out.println("No room selected yet!");
-        else System.out.println("Selected " + room.rid + " " + room.rtype);
+        else {
+            System.out.println("Selected " + room.rid + " " + room.rtype);
+            try (CallableStatement stmnt = Main.con.prepareCall(getBookingQueryString())) {
+                stmnt.setInt(1, Integer.parseInt(room.getRid()));
+                stmnt.setString(2, Infos.username);
+                stmnt.setString(3, SearchScene.inDate.toString());
+                stmnt.setString(4, SearchScene.outDate.toString());
+                stmnt.setInt(5, SearchScene.persons);
+                stmnt.execute();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+            Parent root = FXMLLoader.load(getClass().getResource("review.fxml"));
+            Main.stage.setScene(new Scene(root, 600, 500));
+
+        }
+    }
+
+    public void SeeAllReviewsClicked(ActionEvent event) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("allreviews.fxml"));
+        Main.stage.setScene(new Scene(root, 600, 500));
     }
 
     public class Room {
