@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.sql.CallableStatement;
@@ -14,7 +15,7 @@ public class Controller {
 
     public Button loginButton;
     public TextField username;
-    public TextField password;
+    public PasswordField password;
 
     public void loginButtonClicked(ActionEvent event) throws Exception {
         String usn = username.getText();
