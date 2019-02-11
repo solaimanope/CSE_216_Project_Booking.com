@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
@@ -17,17 +19,17 @@
             <Image url="@logox.png" />
          </image>
       </ImageView>
-      <TextField fx:id="searchBar" layoutX="45.0" layoutY="232.0" prefHeight="37.0" prefWidth="438.0" promptText="Enter City Name">
+      <TextField fx:id="searchBar" layoutX="45.0" layoutY="170.0" prefHeight="37.0" prefWidth="438.0" promptText="Enter City Name">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <Button fx:id="searchButton" layoutX="498.0" layoutY="232.0" mnemonicParsing="false" onAction="#searched" prefHeight="37.0" prefWidth="85.0" text="Search">
+      <Button fx:id="searchButton" layoutX="498.0" layoutY="170.0" mnemonicParsing="false" onAction="#searched" prefHeight="37.0" prefWidth="85.0" text="Search">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <RadioButton fx:id="radio1" layoutX="238.0" layoutY="311.0" mnemonicParsing="false" selected="true" text="Accomodaton">
+      <RadioButton fx:id="radio1" layoutX="236.0" layoutY="367.0" mnemonicParsing="false" selected="true" text="Accomodaton">
          <font>
             <Font size="16.0" />
          </font>
@@ -35,12 +37,30 @@
             <ToggleGroup fx:id="ptype" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="radio2" layoutX="238.0" layoutY="341.0" mnemonicParsing="false" text="Car Rental" toggleGroup="$ptype">
+      <RadioButton fx:id="radio2" layoutX="236.0" layoutY="397.0" mnemonicParsing="false" text="Car Rental" toggleGroup="$ptype">
          <font>
             <Font size="16.0" />
          </font>
       </RadioButton>
       <Label fx:id="welcomeText" layoutX="45.0" layoutY="441.0" text="Welcome">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="inPicker" layoutX="45.0" layoutY="224.0" />
+      <Label layoutX="45.0" layoutY="251.0" text="Check-in Date">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="outPicker" layoutX="236.0" layoutY="223.0" />
+      <Label layoutX="236.0" layoutY="250.0" text="Check-out Date">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Spinner fx:id="spinner" layoutX="434.0" layoutY="224.0" />
+      <Label layoutX="434.0" layoutY="251.0" text="Persons">
          <font>
             <Font size="16.0" />
          </font>

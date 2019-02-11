@@ -35,7 +35,8 @@ public class ResultScene implements Initializable {
     public String getQueryString() {
         String SQL = "select P.property_id pid, P.property_name pname, P.rating prating\n" +
                 "from properties P join cities C on (P.city_id=C.city_id)\n" +
-                "where P.property_type = ? and upper(C.city_name) like ?";
+                "where P.property_type = ? and upper(C.city_name) like ? and\n" +
+                "is_valid_hotel(P.property_id, to_date(?, 'YYYY-MM-DD'), to_date(?, 'YYYY-MM-DD'), ?);";
 
         return SQL;
 
@@ -53,6 +54,10 @@ public class ResultScene implements Initializable {
         try (PreparedStatement stmt = Main.con.prepareStatement(getQueryString())) {
             stmt.setInt(1, 1);
             stmt.setString(2, "%"+SearchScene.searchString.toUpperCase()+"%");
+            stmt.setString(3, SearchScene.inDate.toString());
+            stmt.setString(4, SearchScene.outDate.toString());
+            stmt.setInt(5, SearchScene.persons);
+
             rs = stmt.executeQuery();
             displayProperties(rs);
         } catch (Exception e) {

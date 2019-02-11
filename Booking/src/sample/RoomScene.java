@@ -29,24 +29,46 @@ public class RoomScene implements Initializable {
     public String getQueryString() {
         String SQL = "select *\n" +
                 "from rooms\n" +
-                "where property_id = ?";
+                "where property_id = ? and is_valid_room(room_id, to_date(?, 'YYYY-MM-DD'), to_date(?, 'YYYY-MM-DD'), ?)";
 
         return SQL;
-
+    }
+    public String getInfoQueryString() {
+        String SQL = "select * from properties\n" +
+                "where property_id  = ?";
+        return SQL;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("initializng room scene");
 
+        ResultSet rs;
+        try (PreparedStatement stmt = Main.con.prepareStatement(getInfoQueryString())) {
+            stmt.setInt(1, Integer.parseInt(ResultScene.selectedProperty));
+            rs = stmt.executeQuery();
+
+            rs.next();
+            hotelName.setText(rs.getString("property_name"));
+            hotelRating.setText(rs.getString("rating"));
+            hotelDesc.setText(rs.getString("description"));
+
+            displayRooms(rs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         roomTypeCol.setCellValueFactory(new PropertyValueFactory<>("rtype"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("rprice"));
         sleepsCol.setCellValueFactory(new PropertyValueFactory<>("rsleeps"));
         acCol.setCellValueFactory(new PropertyValueFactory<>("rac"));
 
-        ResultSet rs;
         try (PreparedStatement stmt = Main.con.prepareStatement(getQueryString())) {
             stmt.setInt(1, Integer.parseInt(ResultScene.selectedProperty));
+            stmt.setString(2, SearchScene.inDate.toString());
+            stmt.setString(3, SearchScene.outDate.toString());
+            stmt.setInt(4, SearchScene.persons);
+
             rs = stmt.executeQuery();
             displayRooms(rs);
         } catch (Exception e) {
