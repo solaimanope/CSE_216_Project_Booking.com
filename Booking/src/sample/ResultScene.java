@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 
 public class ResultScene implements Initializable {
     public static String selectedProperty;
+    public static String pName;
 
     public TableView<Property> hotelsList;
     public Button goBack;
@@ -36,7 +37,7 @@ public class ResultScene implements Initializable {
         String SQL = "select P.property_id pid, P.property_name pname, P.rating prating\n" +
                 "from properties P join cities C on (P.city_id=C.city_id)\n" +
                 "where P.property_type = ? and upper(C.city_name) like ? and\n" +
-                "is_valid_hotel(P.property_id, to_date(?, 'YYYY-MM-DD'), to_date(?, 'YYYY-MM-DD'), ?);";
+                "is_valid_property(P.property_id, to_date(?, 'YYYY-MM-DD'), to_date(?, 'YYYY-MM-DD'), ?);";
 
         return SQL;
 
@@ -52,7 +53,7 @@ public class ResultScene implements Initializable {
 
         ResultSet rs;
         try (PreparedStatement stmt = Main.con.prepareStatement(getQueryString())) {
-            stmt.setInt(1, 1);
+            stmt.setInt(1, SearchScene.pType);
             stmt.setString(2, "%"+SearchScene.searchString.toUpperCase()+"%");
             stmt.setString(3, SearchScene.inDate.toString());
             stmt.setString(4, SearchScene.outDate.toString());
@@ -88,8 +89,15 @@ public class ResultScene implements Initializable {
         else {
             System.out.println("Selected " + property.pid + " " + property.pname);
             selectedProperty = property.pid;
-            Parent root = FXMLLoader.load(getClass().getResource("roomlist.fxml"));
-            Main.stage.setScene(new Scene(root, 600, 500));
+            pName = property.pname;
+
+            if (SearchScene.pType == 1) {
+                Parent root = FXMLLoader.load(getClass().getResource("roomlist.fxml"));
+                Main.stage.setScene(new Scene(root, 600, 500));
+            } else {
+                Parent root = FXMLLoader.load(getClass().getResource("carlist.fxml"));
+                Main.stage.setScene(new Scene(root, 600, 500));
+            }
         }
     }
 

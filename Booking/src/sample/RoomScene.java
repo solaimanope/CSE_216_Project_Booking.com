@@ -42,7 +42,7 @@ public class RoomScene implements Initializable {
         return SQL;
     }
     public String getBookingQueryString() {
-        String SQL = "CALL add_booking(?, ?, to_date(?, 'YYYY-MM-DD'), to_date(?, 'YYYY-MM-DD'), ?)";
+        String SQL = "CALL add_room_booking(?, ?, to_date(?, 'YYYY-MM-DD'), to_date(?, 'YYYY-MM-DD'), ?)";
         return SQL;
     }
 
@@ -61,7 +61,6 @@ public class RoomScene implements Initializable {
             hotelRating.setText(rs.getString("rating"));
             hotelDesc.setText(rs.getString("description"));
 
-            displayRooms(rs);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -104,10 +103,9 @@ public class RoomScene implements Initializable {
     }
 
     public void goBackClicked(ActionEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("search.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("result.fxml"));
         Main.stage.setScene(new Scene(root, 600, 500));
     }
-
     public void bookNowClicked(ActionEvent event) throws Exception {
         Room room = roomsList.getSelectionModel().getSelectedItem();
         if (room==null) System.out.println("No room selected yet!");

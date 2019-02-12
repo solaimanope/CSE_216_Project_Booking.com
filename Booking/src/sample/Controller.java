@@ -14,8 +14,14 @@ import java.sql.Types;
 public class Controller {
 
     public Button loginButton;
+    public Button signupButton;
     public TextField username;
     public PasswordField password;
+
+    public void signupButtonClicked(ActionEvent event) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("signup.fxml"));
+        Main.stage.setScene(new Scene(root, 600, 500));
+    }
 
     public void loginButtonClicked(ActionEvent event) throws Exception {
         String usn = username.getText();

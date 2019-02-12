@@ -64,8 +64,13 @@ public class AllReviewsScene implements Initializable {
     }
 
     public void goBackClicked(ActionEvent event) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("roomlist.fxml"));
-        Main.stage.setScene(new Scene(root, 600, 500));
+        if (SearchScene.pType==1) {
+            Parent root = FXMLLoader.load(getClass().getResource("roomlist.fxml"));
+            Main.stage.setScene(new Scene(root, 600, 500));
+        } else {
+            Parent root = FXMLLoader.load(getClass().getResource("carlist.fxml"));
+            Main.stage.setScene(new Scene(root, 600, 500));
+        }
     }
 
     public class Review {

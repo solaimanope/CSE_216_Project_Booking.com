@@ -23,10 +23,12 @@ public class SearchScene implements Initializable {
     public DatePicker inPicker;
     public DatePicker outPicker;
     public Spinner<Integer> spinner;
+    public Button signOut;
     public static String searchString;
     public static LocalDate inDate;
     public static LocalDate outDate;
     public static int persons;
+    public static int pType;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -85,10 +87,18 @@ public class SearchScene implements Initializable {
         inDate = inPicker.getValue();
         outDate = outPicker.getValue();
         persons = spinner.getValue();
-
-        System.out.println(inDate+" "+outDate+" "+persons);
+        pType = 1;
+        if (radio2.isSelected()) pType = 2;
+        System.out.println(inDate+" "+outDate+" "+persons + " " + pType);
 
         Parent root = FXMLLoader.load(getClass().getResource("result.fxml"));
+        Main.stage.setScene(new Scene(root, 600, 500));
+    }
+
+    public void signOutClicked(ActionEvent event) throws Exception{
+        Infos.username = null;
+
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         Main.stage.setScene(new Scene(root, 600, 500));
     }
 

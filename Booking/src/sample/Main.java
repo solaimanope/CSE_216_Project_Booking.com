@@ -19,9 +19,9 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         primaryStage.setTitle("Booking.com");
         primaryStage.setScene(new Scene(root, 600, 500));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
-
 
     public static void main(String[] args) {
 

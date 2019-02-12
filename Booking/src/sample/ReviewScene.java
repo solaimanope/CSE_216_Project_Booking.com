@@ -38,8 +38,8 @@ public class ReviewScene implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("initializng Review scene");
 
-        hotelName.setText(RoomScene.hName);
 
+        hotelName.setText(ResultScene.pName);
 
         // display actor information
     }
