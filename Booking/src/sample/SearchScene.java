@@ -24,6 +24,7 @@ public class SearchScene implements Initializable {
     public DatePicker outPicker;
     public Spinner<Integer> spinner;
     public Button signOut;
+    public Button extraQueries;
     public static String searchString;
     public static LocalDate inDate;
     public static LocalDate outDate;
@@ -92,6 +93,12 @@ public class SearchScene implements Initializable {
         System.out.println(inDate+" "+outDate+" "+persons + " " + pType);
 
         Parent root = FXMLLoader.load(getClass().getResource("result.fxml"));
+        Main.stage.setScene(new Scene(root, 600, 500));
+    }
+
+    public void extraQueriesClicked(ActionEvent event) throws Exception{
+
+        Parent root = FXMLLoader.load(getClass().getResource("extraqueries.fxml"));
         Main.stage.setScene(new Scene(root, 600, 500));
     }
 

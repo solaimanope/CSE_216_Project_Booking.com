@@ -30,14 +30,15 @@ public class ResultScene implements Initializable {
     public Button goBack;
     public Button proceed;
     public TableColumn propertyCol;
-    public TableColumn priceCol;
+    //public TableColumn priceCol;
     public TableColumn ratingCol;
 
     public String getQueryString() {
         String SQL = "select P.property_id pid, P.property_name pname, P.rating prating\n" +
                 "from properties P join cities C on (P.city_id=C.city_id)\n" +
                 "where P.property_type = ? and upper(C.city_name) like ? and\n" +
-                "is_valid_property(P.property_id, to_date(?, 'YYYY-MM-DD'), to_date(?, 'YYYY-MM-DD'), ?);";
+                "is_valid_property(P.property_id, to_date(?, 'YYYY-MM-DD'), to_date(?, 'YYYY-MM-DD'), ?)" +
+                " order by P.rating desc";
 
         return SQL;
 
@@ -48,7 +49,7 @@ public class ResultScene implements Initializable {
         System.out.println("initializng result scene");
 
         propertyCol.setCellValueFactory(new PropertyValueFactory<>("pname"));
-        priceCol.setCellValueFactory(new PropertyValueFactory<>("pprice"));
+        //priceCol.setCellValueFactory(new PropertyValueFactory<>("pprice"));
         ratingCol.setCellValueFactory(new PropertyValueFactory<>("prating"));
 
         ResultSet rs;
